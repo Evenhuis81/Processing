@@ -11,3 +11,7 @@ class Vf4d {
         y2 = y2_;
     }
 }
+
+class Vi2d {
+    int x, y;
+}

@@ -1,33 +1,39 @@
 class Motion {
     PVector pos, vel, acc, maxVel;
     boolean limitVelX, limitVelY, minVelX, minVelY, resetAcc, frictionX;
+    int count;
+    float[] followX1, followX2, followY1, followY2;
     Motion() {
         pos = new PVector(0, 0);
         vel = new PVector(0, 0);
         acc = new PVector(0, 0);
         maxVel = new PVector (0, 0);
+        followX1 = new float[20];
+        followX2 = new float[20];
+        followY1 = new float[20];
+        followY2 = new float[20];
+        count = 0;
     }
     void follow(PVector targetPos) {
-        PVector force = PVector.sub(targetPos, pos);
-        // println(force.mag());
-        // force.setMag(10);
-        float distance = force.mag();
-        int range = 100;
-        float maxSpeed = 20;
-        if (distance < range) {
-            maxSpeed = map(distance, 0, range, 0, 20);
-            // println(maxSpeed);
+        if (count > 19) {
+            if (count % 40 > 19) {
+                pos.x = followX1[count % 20];
+                pos.y = followY1[count % 20];
+                followX2[count % 20] = targetPos.x + player.w/2;
+                followY2[count % 20] = targetPos.y + player.h/2;
+            } else {
+                pos.x = followX2[count % 20];
+                pos.y = followY2[count % 20];
+                followX1[count % 20] = targetPos.x + player.w/2;
+                followY1[count % 20] = targetPos.y + player.h/2;
+            }
+        } else {
+            followX1[count] = targetPos.x + player.w/2;
+            followY1[count] = targetPos.y + player.h/2;
+            pos.x = followX1[0];
+            pos.y = followY1[0];
         }
-        force.setMag(maxSpeed);
-        force.sub(vel);
-        acc.add(force);
-    }
-    void seek(PVector target) {
-        PVector force = PVector.sub(target, pos);  // desired velocity
-        force.setMag(5);
-        force.sub(vel);
-        force.limit(0.3);
-        acc.add(force);
+        count++;
     }
     void update() {
         vel.add(acc);

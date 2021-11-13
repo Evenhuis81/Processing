@@ -1,26 +1,22 @@
 class Seeker extends Motion {
-    Vi4d screenPos;
-    int w, h;
+    Vi2d screenPos;
+    int w, h, r;
     Seeker() {
         h = height / 24;
         w = h / 2;
-        pos.set(width * 0.3, height * 0.3);
+        // pos.set(width * 0.1, height * 0.9);
+        pos.set(player.pos.x, player.pos.y);
         limitVelX = true;
         limitVelY = true;
-        // minVelX = true;
-        // minVelY = true;
-        maxVel.set(20, 20);
-        screenPos = new Vi4d();
+        maxVel.set(10, 20);
+        screenPos = new Vi2d();
         resetAcc = true;
-    }
-    void update() {
-        // frictionX = collisionSide == "bottom" && !left && !right;
-        super.update();
+        r = 8;
     }
     void show() {
-        fill(128, 128, 0);
+        fill(128, 255, 128);
         noStroke();
-        tv.drawRect(pos.x, pos.y, pos.x + w, pos.y + h, screenPos);
+        tv.drawCircle(pos.x, pos.y, r, screenPos);
     }
 
     // void setGravity(boolean flag) {

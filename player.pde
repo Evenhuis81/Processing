@@ -1,7 +1,7 @@
 class Player extends Motion {
     Vi4d screenPos;
     boolean up, down, left, right, jump;
-    float jumpVel;
+    float jumpVel, accInc;
     int w, h;
     // String collisionSide;
     Player() {
@@ -11,9 +11,10 @@ class Player extends Motion {
         limitVelX = true;
         limitVelY = true;
         minVelX = true;
-        maxVel.set(25, 25);
+        maxVel.set(20, 10);
         jumpVel = -15;
         screenPos = new Vi4d();
+        accInc = 0.8;
     }
     void update() {
         // frictionX = collisionSide == "bottom" && !left && !right;
@@ -32,37 +33,37 @@ class Player extends Motion {
     void up(boolean flag) {
         if (flag && !up) {
             up = true;
-            acc.y -= .2;
+            acc.y -= accInc;
         } else if (!flag) {
             up = false;
-            acc.y += .2;
+            acc.y += accInc;
         }
     }
     void down(boolean flag) {
         if (flag && !down) {
             down = true;
-            acc.y += .2;
+            acc.y += accInc;
         } else if (!flag) {
             down = false;
-            acc.y -= .2;
+            acc.y -= accInc;
         }
     }
     void left(boolean flag) {
         if (flag && !left) {
             left = true;
-            acc.x -= .2;
+            acc.x -= accInc;
         } else if (!flag) {
             left = false;
-            acc.x += .2;
+            acc.x += accInc;
         }
     }
     void right(boolean flag) {
         if (flag && !right) {
             right = true;
-            acc.x += .2;
+            acc.x += accInc;
         } else if (!flag) {
             right = false;
-            acc.x -= .2;
+            acc.x -= accInc;
         }
     }
     void jump(boolean flag) {

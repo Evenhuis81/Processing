@@ -21,12 +21,12 @@ void keyReleased() {
 
 void mousePressed() {
     if (mouseButton == CENTER) tv.startPan(mouseX, mouseY);
-    if (mouseButton == LEFT && slider.selectorInside()) {
-        slider.sliding = true;
-    }
+    // if (mouseButton == LEFT && slider.selectorInside()) {
+        // slider.sliding = true;
+    // }
 }
 void mouseReleased() {
-    if (mouseButton == LEFT && slider.sliding) slider.release();
+    // if (mouseButton == LEFT && slider.sliding) slider.release();
 }
 
 void mouseDragged() {
