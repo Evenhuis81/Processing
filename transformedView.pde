@@ -16,17 +16,13 @@ class TransformedView extends Motion {
         target = new PVector();
     }
     void follow(PVector target_) {
-        if (!seek) {
-            posBefore.set(width/2, height/2);
-            seek = true;
-        } else {
             posAfter.set(target_.x, target_.y);
             target.add(PVector.sub(posAfter, posBefore));
             posBefore.set(target_.x, target_.y);
             super.follow(target);
             update();
             // resolveWorldBounds();
-        }
+        // }
         // super.follow(target);
     }
     void resolveWorldBounds() {
@@ -105,5 +101,8 @@ class TransformedView extends Motion {
         screenToWorldAfterZoom(x, y);
         pos.x -= (worldZoom.x2 - worldZoom.x1);
         pos.y -= (worldZoom.y2 - worldZoom.y1);
+    }
+    void grid() {
+        //
     }
 }

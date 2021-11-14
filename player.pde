@@ -7,11 +7,11 @@ class Player extends Motion {
     Player() {
         h = height / 12;
         w = h / 2;
-        pos.set(width/2 - w/2, height/2 - h/2);
+        pos.set(width/2, height/2);
         limitVelX = true;
         limitVelY = true;
         minVelX = true;
-        maxVel.set(20, 10);
+        maxVel.set(10, 20);
         jumpVel = -15;
         screenPos = new Vi4d();
         accInc = 0.8;
